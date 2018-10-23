@@ -10,9 +10,9 @@ public class Config {
             Properties properties=new Properties();
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
             user=properties.getProperty("user");
-            dbUrl=properties.getProperty("dbUrl");
-            dbUser=properties.getProperty("dbUser");
-            dbPassword=properties.getProperty("dbPassword");
+            dbUrl=properties.getProperty("db_url");
+            dbUser=properties.getProperty("db_user");
+            dbPassword=properties.getProperty("db_password");
         }catch (IOException e){
             e.printStackTrace();
         }
