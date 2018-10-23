@@ -1,8 +1,8 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.Answer;
 import model.User;
-import service.AnswerService;
 import service.UserService;
 
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class UserController extends HttpServlet {
 
     UserService userService = new UserService();
-    AnswerService answerService =  new AnswerService();
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,6 +35,15 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        try{
+            Answer answer = new Answer(userService.getAllUsers());
+            answer.setAnswer(true);
+            Gson gson = new Gson();
+            resp.getWriter().println(gson.toJson(answer));
+        }catch (Exception e){
+            resp.getWriter().println("Error");
+            resp.setStatus(500);
+        }
     }
 
     @Override
