@@ -14,22 +14,30 @@ import java.io.IOException;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
-
     UserService userService = new UserService();
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
-        User user = gson.fromJson(req.getReader(), User.class);
-        userService.add(user);
+        try {
+            Gson gson = new Gson();
+            User user = gson.fromJson(req.getReader(), User.class);
+            userService.add(user);
+        }catch (Exception e){
+            resp.getWriter().println("Error");
+            resp.setStatus(503);
+        }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
-        User user = gson.fromJson(req.getReader(), User.class);
-        userService.update(user);
+        try {
+            Gson gson = new Gson();
+            User user = gson.fromJson(req.getReader(), User.class);
+            userService.update(user);
+        }catch (Exception e){
+            resp.getWriter().println("Error");
+            resp.setStatus(503);
+        }
     }
 
     @Override
@@ -42,13 +50,18 @@ public class UserController extends HttpServlet {
             resp.getWriter().println(gson.toJson(answer));
         }catch (Exception e){
             resp.getWriter().println("Error");
-            resp.setStatus(500);
+            resp.setStatus(503);
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        userService.delete(Integer.valueOf(id));
+        try {
+            String id = req.getParameter("id");
+            userService.delete(Integer.valueOf(id));
+        }catch (Exception e){
+            resp.getWriter().println("Error");
+            resp.setStatus(503);
+        }
     }
 }
