@@ -22,20 +22,24 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         User user = gson.fromJson(req.getReader(), User.class);
+        userService.add(user);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+        Gson gson = new Gson();
+        User user = gson.fromJson(req.getReader(), User.class);
+        userService.update(user);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        String id = req.getParameter("id");
+        userService.delete(Integer.valueOf(id));
     }
 }
