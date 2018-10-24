@@ -38,6 +38,10 @@ public class UserService {
                 users.add(user);
             }
         }
+        if(users.size()==0){
+            users=null;
+        }
+
         return users;
     }
 
