@@ -25,6 +25,8 @@ public class UserController extends HttpServlet {
             userService.add(user);
         }catch (Exception e){
             answer.setAnswer(false);
+            answer.setUsers(null);
+            answer.setError("Server internal error");
             resp.getWriter().println(gson.toJson(answer));
             resp.setStatus(503);
         }
@@ -39,6 +41,8 @@ public class UserController extends HttpServlet {
             userService.update(user);
         }catch (Exception e){
             answer.setAnswer(false);
+            answer.setUsers(null);
+            answer.setError("Server internal error");
             resp.getWriter().println(gson.toJson(answer));
             resp.setStatus(503);
         }
@@ -53,6 +57,8 @@ public class UserController extends HttpServlet {
             resp.getWriter().println(gson.toJson(answer));
         }catch (Exception e){
             answer.setAnswer(false);
+            answer.setUsers(null);
+            answer.setError("Server internal error");
             resp.getWriter().println(gson.toJson(answer));
             resp.setStatus(503);
         }
@@ -67,6 +73,8 @@ public class UserController extends HttpServlet {
             userService.delete(Integer.valueOf(id));
         }catch (Exception e){
             answer.setAnswer(false);
+            answer.setUsers(null);
+            answer.setError("Server internal error");
             resp.getWriter().println(gson.toJson(answer));
             resp.setStatus(503);
         }
